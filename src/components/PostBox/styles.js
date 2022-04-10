@@ -1,5 +1,4 @@
 import styled from '@emotion/styled'
-import { styled as customize } from '@mui/material/styles'
 import { Button, Avatar, TextField, LinearProgress } from '@mui/material'
 
 export const PostBoxContainer = styled.div`
@@ -17,10 +16,10 @@ export const PostInput = styled(TextField)({
   marginBottom: '16px',
 })
 
-export const ProfilePicture = customize(Avatar)({
-  width: '48px',
-  height: '48px',
-})
+export const ProfilePicture = styled(Avatar)`
+  width: 48px;
+  height: 48px;
+`
 
 export const BottomWrapper = styled.div`
   display: flex;
@@ -43,9 +42,9 @@ export const BottomWrapper = styled.div`
   }
 `
 
-export const PostButton = customize(Button)({
-  width: 75,
-})
+export const PostButton = styled(Button)`
+  width: 75px;
+`
 
 export const CharactersCountBar = styled(LinearProgress)`
   height: 10px;
