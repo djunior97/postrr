@@ -13,7 +13,7 @@ export function Header() {
   const theme = useTheme()
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, marginBottom: '16px' }}>
       <AppBar
         position="static"
         sx={{
@@ -21,7 +21,7 @@ export function Header() {
         }}
       >
         <Container maxWidth="md">
-          <Toolbar>
+          <Toolbar disableGutters>
             <Typography
               variant="h6"
               component="div"
