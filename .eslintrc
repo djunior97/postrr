@@ -1,0 +1,11 @@
+{
+    "extends": ["@imaginary-cloud/react"],
+    "settings": {
+        "import/resolver": {
+          "node": {
+            "extensions": [".js", ".jsx"],
+            "moduleDirectory": ["src", "node_modules"]
+          }
+        }
+      }
+  }
