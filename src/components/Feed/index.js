@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
 import Divider from '@mui/material/Divider'
 
 import ToggleButton from '@mui/material/ToggleButton'
@@ -9,10 +10,15 @@ import { Post } from 'components/Post'
 import { FeedContainer, ToggleContainer } from './styles'
 
 export function Feed() {
-  const [alignment, setAlignment] = useState('all')
+  const navigate = useNavigate()
+  const { filter } = useParams()
+  const [alignment, setAlignment] = useState(
+    ['all', 'following'].includes(filter) ? filter : 'all',
+  )
 
   const handleChange = (event, newAlignment) => {
     setAlignment(newAlignment)
+    navigate(`/${newAlignment}`)
   }
 
   return (
