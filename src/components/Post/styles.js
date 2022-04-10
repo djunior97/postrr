@@ -106,9 +106,9 @@ export const RepostActionContainer = styled.div`
 `
 
 export const QuoteActionContainer = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
+  column-gap: 5px;
 
   p {
     margin: 0;
