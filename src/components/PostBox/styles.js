@@ -5,6 +5,7 @@ export const PostBoxContainer = styled.div`
   display: flex;
   column-gap: 16px;
   width: 100%;
+  padding: 16px;
 `
 export const TextAreaSection = styled.div`
   display: flex;
