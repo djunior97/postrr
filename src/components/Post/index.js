@@ -1,6 +1,10 @@
 import React from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
+
+import { SelectUsers } from 'store/users'
+import { SelectPosts } from 'store/posts'
 
 import {
   PostContainer,
@@ -22,77 +26,71 @@ import {
   QuotePostContent,
 } from './styles'
 
-export function Post({ isRepost, isQuotePost, postId }) {
+export function Post({ post }) {
   const location = useLocation()
   const navigate = useNavigate()
+  const allUsers = useSelector(SelectUsers)
+  const allPosts = useSelector(SelectPosts)
+  const user = allUsers.find((u) => u.id === post.user_id)
+  const originUser =
+    (post.isRepost || post.isQuotePost) &&
+    allUsers.find((u) => u.id === post.origin_user_id)
+  const originPost =
+    (post.isRepost || post.isQuotePost) &&
+    allPosts.find((p) => p.id === post.origin_post_id)
+
+  const getCorrectUserAttribute = (prop) =>
+    post.isRepost ? originUser[prop] : user[prop]
 
   return (
     <PostContainer>
       <LeftSection>
-        {isRepost && <RepostIcon />}
+        {post.isRepost && <RepostIcon />}
 
         <ProfilePicture
-          onClick={() => navigate(`${location.pathname}/userProfile`)}
-          alt="Michael Scott"
-          src="https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png"
+          onClick={() =>
+            navigate(
+              `${location.pathname}/userProfile/${getCorrectUserAttribute(
+                'id',
+              )}`,
+            )
+          }
+          alt="profile picture"
+          src={getCorrectUserAttribute('picture')}
         />
       </LeftSection>
 
       <ContentSection>
-        {isRepost && (
+        {post.isRepost && (
           <RepostUserName>
-            Michael Scott <span>reposted</span>
+            {user.name} <span>reposted</span>
           </RepostUserName>
         )}
 
         <UserInfo>
-          <Name>Michael Scott</Name>
-          <UserName>@best_boss</UserName>
+          <Name>{getCorrectUserAttribute('name')}</Name>
+          <UserName>@{getCorrectUserAttribute('username')}</UserName>
         </UserInfo>
 
         <PostContent>
-          Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-          commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus
-          et magnis dis parturient montes, nascetur ridiculus mus. Donec quam
-          felis, ultricies nec, pellentesque eu, pretium quis, sem. Nulla
-          consequat massa quis enim. Donec pede justo, fringilla vel, aliquet
-          nec, vulputate eget, arcu. In enim justo, rhoncus ut, imperdiet a,
-          venenatis vitae, justo. Nullam dictum felis eu pede mollis pretium.
-          Integer tincidunt. Cras dapibus. Vivamus elementum semper nisi. Aenean
-          vulputate eleifend tellus. Aenean leo ligula, porttitor eu, consequat
-          vitae, eleifend ac, enim. Aliquam lorem ante, dapibus in, viverra
-          quis, feugiat a, tellus. Phasellus viverra nulla ut metus varius
-          laoreet. Quisque rutrum. Aenean imp
+          {post.isRepost ? originPost.content : post.content}
         </PostContent>
 
-        {isQuotePost && (
+        {post.isQuotePost && (
           <QuotePostContainer>
             <QuoteUserWrapper>
               <ProfilePicture
                 onClick={() => navigate(`${location.pathname}/userProfile`)}
-                alt="Michael Scott"
-                src="https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png"
+                alt="profile picture"
+                src={originUser.picture}
               />
               <UserInfo>
-                <Name>Michael Scott</Name>
-                <UserName>@best_boss</UserName>
+                <Name>{originUser.name}</Name>
+                <UserName>@{originUser.username}</UserName>
               </UserInfo>
             </QuoteUserWrapper>
 
-            <QuotePostContent>
-              Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean
-              commodo ligula eget dolor. Aenean massa. Cum sociis natoque
-              penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-              Donec quam felis, ultricies nec, pellentesque eu, pretium quis,
-              sem. Nulla consequat massa quis enim. Donec pede justo, fringilla
-              vel, aliquet nec, vulputate eget, arcu. In enim justo, rhoncus ut,
-              imperdiet a, venenatis vitae, justo. Nullam dictum felis eu pede
-              mollis pretium. Integer tincidunt. Cras dapibus. Vivamus elementum
-              semper nisi. Aenean vulputate eleifend tellus. Aenean leo ligula,
-              porttitor eu, consequat vitae, eleifend ac, enim. Aliquam lorem
-              ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
-              viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imp
-            </QuotePostContent>
+            <QuotePostContent>{originPost.content}</QuotePostContent>
           </QuotePostContainer>
         )}
 
@@ -113,15 +111,13 @@ export function Post({ isRepost, isQuotePost, postId }) {
 }
 
 Post.propTypes = {
-  /** Tells whether the content is a repost or not */
-  isRepost: PropTypes.bool,
-  /** Tells whether the content is a quote post or not */
-  isQuotePost: PropTypes.bool,
-  /** Post content to show */
-  // postContent:
-}
-
-Post.defaultProps = {
-  isRepost: false,
-  isQuotePost: false,
+  post: PropTypes.shape({
+    id: PropTypes.number,
+    content: PropTypes.string,
+    isRepost: PropTypes.bool,
+    isQuotePost: PropTypes.bool,
+    user_id: PropTypes.number,
+    origin_user_id: PropTypes.number,
+    origin_post_id: PropTypes.number,
+  }).isRequired,
 }
