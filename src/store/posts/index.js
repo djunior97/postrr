@@ -12,11 +12,12 @@ const getPosts = () => {
     localStorage.setItem(postsStorageKey, JSON.stringify(posts))
   }
 
-  return posts
+  return posts.reverse()
 }
 
 const initialState = {
   list: getPosts(),
+  filtered: getPosts(),
 }
 
 const postsSlice = createSlice({
@@ -25,7 +26,7 @@ const postsSlice = createSlice({
   reducers: {
     newPost: (state, action) => ({
       ...state,
-      list: [...state.list, action.payload],
+      list: [action.payload, ...state.list],
     }),
   },
 })
@@ -34,6 +35,15 @@ const postsSlice = createSlice({
 export const { newPost } = postsSlice.actions
 
 // Selectors
-export const SelectPosts = (state) => state.users.list
+export const SelectPosts = (state) => state.posts.list
+export const SelectFollowingPosts = (state) => {
+  const followingList = state.user.info.following
+
+  const followingPosts = state.posts.list.filter((p) =>
+    followingList.includes(p.user_id),
+  )
+
+  return followingPosts
+}
 
 export default postsSlice.reducer
