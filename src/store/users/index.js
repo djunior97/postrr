@@ -1,7 +1,22 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { users as mockUsers } from 'mocks/users'
+
+const usersStorageKey = 'users@posterr'
+
+const getUsers = () => {
+  let users = JSON.parse(localStorage.getItem(usersStorageKey))
+
+  if (!users) {
+    users = mockUsers
+
+    localStorage.setItem(usersStorageKey, JSON.stringify(users))
+  }
+
+  return users
+}
 
 const initialState = {
-  list: [],
+  list: getUsers(),
 }
 
 const usersSlice = createSlice({
