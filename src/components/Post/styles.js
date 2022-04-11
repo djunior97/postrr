@@ -50,8 +50,8 @@ export const ContentSection = styled.div`
 export const UserInfo = styled.div`
   position: relative;
   display: flex;
-  align-items: flex-end;
-  column-gap: 10px;
+  align-items: center;
+  column-gap: 5px;
 
   p {
     margin: 0;
@@ -142,5 +142,8 @@ export const QuotePostContainer = styled.div`
 export const QuoteUserWrapper = styled.div`
   position: relative;
   display: flex;
+  column-gap: 0;
 `
-export const QuotePostContent = styled.p``
+export const QuotePostContent = styled.p`
+  margin: 0;
+`
