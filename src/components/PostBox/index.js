@@ -1,4 +1,8 @@
 import React, { useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { SelectUserInfo } from 'store/userInfo'
+import { SelectPosts, newPost as newPostAction } from 'store/posts'
 
 import {
   PostBoxContainer,
@@ -11,27 +15,44 @@ import {
 } from './styles'
 
 export function PostBox() {
+  const dispatch = useDispatch()
   const [isPostButtonDisabled, setIsPostButtonDisabled] = useState(true)
+  const [newPostContent, setNewPostContent] = useState('')
   const [charactersCount, setCharactersCount] = useState(0)
+  const userInfo = useSelector(SelectUserInfo)
+  const posts = useSelector(SelectPosts)
 
   const handlePostInputChange = (event) => {
     setIsPostButtonDisabled(shouldDisablePostButton(event.target.value))
     setCharactersCount(event.target.value.length)
+    setNewPostContent(event.target.value)
   }
 
   const shouldDisablePostButton = (postContent) =>
     !(postContent.length >= 1 && postContent.length <= 777)
 
+  const handleSubmitPost = () => {
+    const newPost = {
+      id: posts.length + 1,
+      content: newPostContent,
+      isRepost: false,
+      isQuotePost: false,
+      user_id: userInfo.id,
+    }
+
+    dispatch(newPostAction(newPost))
+
+    setNewPostContent('')
+  }
+
   return (
     <PostBoxContainer>
-      <ProfilePicture
-        alt="Michael Scott"
-        src="https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png"
-      />
+      <ProfilePicture alt="profile picture" src={userInfo.picture} />
 
       <TextAreaSection>
         <PostInput
           onChange={handlePostInputChange}
+          value={newPostContent}
           label="Share your thoughts..."
           multiline
           rows={4}
@@ -47,7 +68,11 @@ export function PostBox() {
             {charactersCount >= 700 && <p>{charactersCount} / 777</p>}
           </div>
 
-          <PostButton disabled={isPostButtonDisabled} variant="contained">
+          <PostButton
+            onClick={handleSubmitPost}
+            disabled={isPostButtonDisabled}
+            variant="contained"
+          >
             Post!
           </PostButton>
         </BottomWrapper>
