@@ -123,3 +123,24 @@ export const QuoteIcon = styled(FormatQuoteIcon)`
   position: relative;
   color: ${({ theme }) => theme.palette.primary.textSecondary};
 `
+
+export const QuotePostContainer = styled.div`
+  position: relative;
+  width: 100%;
+  border: 1px solid rgb(207, 217, 222);
+  border-radius: 16px;
+  padding: 12px;
+  margin-top: 8px;
+
+  .MuiAvatar-root {
+    height: 20px;
+    width: 20px;
+    margin-right: 8px;
+  }
+`
+
+export const QuoteUserWrapper = styled.div`
+  position: relative;
+  display: flex;
+`
+export const QuotePostContent = styled.p``

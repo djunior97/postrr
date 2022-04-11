@@ -39,16 +39,16 @@ export function Feed() {
         <ToggleButton value="following">Following</ToggleButton>
       </ToggleContainer>
 
+      <Post isQuotePost />
+      <Divider />
+
+      <Post isRepost />
+      <Divider />
+
       <Post />
       <Divider />
 
-      <Post repost />
-      <Divider />
-
-      <Post />
-      <Divider />
-
-      <Post repost />
+      <Post isRepost />
       <Divider />
 
       <Post />
