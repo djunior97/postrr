@@ -46,7 +46,7 @@ export const UserInfoContainer = styled.div`
 export const ProfileCover = styled.div`
   width: 100%;
   height: 200px;
-  background: url('assets/images/cover.jpeg');
+  background: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png');
   background-size: cover;
   background-position-y: 20%;
 `

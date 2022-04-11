@@ -1,4 +1,5 @@
 import React from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import {
@@ -19,12 +20,19 @@ import {
 } from './styles'
 
 export function Post({ repost }) {
+  const location = useLocation()
+  const navigate = useNavigate()
+
   return (
     <PostContainer>
       <LeftSection>
         {repost && <RepostIcon />}
 
-        <ProfilePicture alt="Michael Scott" src="assets/images/avatar.jpg" />
+        <ProfilePicture
+          onClick={() => navigate(`${location.pathname}/userProfile`)}
+          alt="Michael Scott"
+          src="https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png"
+        />
       </LeftSection>
 
       <ContentSection>

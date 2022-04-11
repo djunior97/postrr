@@ -33,7 +33,10 @@ export function UserProfile() {
         <ProfileCover />
 
         <ProfilePictureWrapper>
-          <ProfilePicture alt="Michael Scott" src="assets/images/avatar.jpg" />
+          <ProfilePicture
+            alt="Michael Scott"
+            src="https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png"
+          />
           <FollowButton variant="contained">Follow</FollowButton>
         </ProfilePictureWrapper>
 

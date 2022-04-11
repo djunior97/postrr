@@ -29,7 +29,10 @@ export function Header() {
             >
               posterr
             </Typography>
-            <Avatar alt="Michael Scott" src="assets/images/avatar.jpg" />
+            <Avatar
+              alt="Michael Scott"
+              src="https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png"
+            />
           </Toolbar>
         </Container>
       </AppBar>

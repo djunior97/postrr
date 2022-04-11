@@ -39,6 +39,7 @@ export const RepostUserName = styled.p`
 export const ProfilePicture = styled(Avatar)`
   width: 48px;
   height: 48px;
+  cursor: pointer;
 `
 export const ContentSection = styled.div`
   display: flex;

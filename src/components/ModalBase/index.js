@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-useless-fragment */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { ModalContainer } from './styles'
@@ -10,7 +11,7 @@ export function ModalBase({ isOpen, onClose, children }) {
       aria-labelledby="modal-modal-title"
       aria-describedby="modal-modal-description"
     >
-      {children}
+      <>{children}</>
     </ModalContainer>
   )
 }
