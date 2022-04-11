@@ -17,8 +17,10 @@ export function Feed() {
   )
 
   const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment)
-    navigate(`/${newAlignment}`)
+    if (newAlignment !== null) {
+      setAlignment(newAlignment)
+      navigate(`/${newAlignment}`)
+    }
   }
 
   return (
