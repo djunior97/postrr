@@ -1,5 +1,18 @@
 export const users = [
   {
+    id: 1,
+    name: 'Michael Scott',
+    username: 'best_boss',
+    following: [3, 11, 5, 8, 10],
+    followers: [2, 3, 4, 5, 6, 7, 8, 9, 10, 11],
+    picture:
+      'https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png',
+    cover:
+      'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
+    bio: 'World&#39;s Best Boss | Regional Manager @DunderMifflinScranton',
+    joinedDate: 'January 2020',
+  },
+  {
     id: 2,
     name: 'Dwight K. Shrute',
     username: 'best_boss',
@@ -58,7 +71,7 @@ export const users = [
     following: [1, 9, 8, 5, 2],
     followers: [10, 9, 7, 3, 2, 1],
     picture:
-      'https://static.wikia.nocookie.net/theoffice/images/0/0b/Angela_Martin.jpg/revision/latest/top-crop/width/200/height/150?cb=20170701090232',
+      'https://br.web.img3.acsta.net/r_1920_1080/newsv7/20/08/20/22/43/37203820.jpg',
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Accounting @DunderMifflinScranton',
@@ -84,7 +97,7 @@ export const users = [
     following: [1, 3, 4, 7, 9, 10, 11],
     followers: [11, 2, 1, 3, 4, 5],
     picture:
-      'https://static.wikia.nocookie.net/theoffice/images/2/20/C0164512-C4C2-485C-9CB6-85B31F642090.jpeg/revision/latest/scale-to-width-down/700?cb=20200103213101',
+      'https://cdn.meutimao.com.br/_upload/torcida-do-corinthians/2021/10/30/andy-bernard_px0300.jpg',
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Salesman @DunderMifflinScranton',
@@ -97,7 +110,7 @@ export const users = [
     following: [1, 5, 6, 7, 3, 2],
     followers: [8, 6, 1, 2, 4],
     picture:
-      'https://static.wikia.nocookie.net/theoffice/images/6/69/Kelly_Kapoor.jpg/revision/latest/scale-to-width-down/700?cb=20170701090501',
+      'https://thetempest.co/wp-content/uploads/2020/06/kapoor-featured-image.png',
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Customer Service @DunderMifflinScranton',
@@ -110,7 +123,7 @@ export const users = [
     following: [1, 8, 2, 9, 10],
     followers: [11, 10, 9, 8, 7],
     picture:
-      'https://static.wikia.nocookie.net/theoffice/images/0/0a/ErinHannon.jpg/revision/latest/scale-to-width-down/666?cb=20170805002853',
+      'https://img.nbc.com/sites/nbcunbc/files/metaverse_assets/1/0/6/3/3/3/erin-500x500.jpg',
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Receptionist @DunderMifflinScranton',
