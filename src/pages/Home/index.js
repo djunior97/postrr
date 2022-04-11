@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
-import { Container, Modal } from '@mui/material'
+import { Container } from '@mui/material'
 
 import { Header } from 'components/Header'
 import { Feed } from 'components/Feed'
+import { UserProfile } from 'components/UserProfile'
+import { ModalBase } from 'components/ModalBase'
 
 export function Home() {
   const navigate = useNavigate()
   const location = useLocation()
-  const [open, setOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false)
   const handleClose = () => {
-    setOpen(false)
+    setModalOpen(false)
     navigate(-1)
   }
 
   useEffect(() => {
-    if (location.pathname.includes('/userProfile')) setOpen(true)
+    if (location.pathname.includes('/userProfile')) {
+      setModalOpen(true)
+    } else {
+      setModalOpen(false)
+    }
   }, [location])
 
   return (
@@ -25,14 +31,9 @@ export function Home() {
         <Feed />
       </Container>
 
-      <Modal
-        open={open}
-        onClose={handleClose}
-        aria-labelledby="modal-modal-title"
-        aria-describedby="modal-modal-description"
-      >
-        <h1>hello</h1>
-      </Modal>
+      <ModalBase isOpen={modalOpen} onClose={handleClose}>
+        <UserProfile />
+      </ModalBase>
     </>
   )
 }
