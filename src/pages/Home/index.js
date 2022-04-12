@@ -6,21 +6,26 @@ import { Header } from 'components/Header'
 import { Feed } from 'components/Feed'
 import { UserProfile } from 'components/UserProfile'
 import { ModalBase } from 'components/ModalBase'
+import { Quote } from 'components/Quote'
 
 export function Home() {
   const navigate = useNavigate()
   const location = useLocation()
-  const [modalOpen, setModalOpen] = useState(false)
-  const handleClose = () => {
-    setModalOpen(false)
+  const [modalQuoteOpen, setModalQuoteOpen] = useState(false)
+  const [modalUserOpen, setModalUserOpen] = useState(false)
+  const handleCloseQuoteModal = () => {
+    setModalQuoteOpen(false)
+  }
+  const handleCloseUserProfile = () => {
+    setModalUserOpen(false)
     navigate(-1)
   }
 
   useEffect(() => {
     if (location.pathname.includes('/userProfile')) {
-      setModalOpen(true)
+      setModalUserOpen(true)
     } else {
-      setModalOpen(false)
+      setModalUserOpen(false)
     }
   }, [location])
 
@@ -28,11 +33,15 @@ export function Home() {
     <>
       <Header />
       <Container maxWidth="sm">
-        <Feed />
+        <Feed openQuoteModal={() => setModalQuoteOpen(true)} />
       </Container>
 
-      <ModalBase isOpen={modalOpen} onClose={handleClose}>
-        <UserProfile />
+      <ModalBase isOpen={modalUserOpen} onClose={handleCloseUserProfile}>
+        <UserProfile backButtonAction={handleCloseUserProfile} />
+      </ModalBase>
+
+      <ModalBase isOpen={modalQuoteOpen} onClose={handleCloseQuoteModal}>
+        <Quote />
       </ModalBase>
     </>
   )
