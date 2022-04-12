@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -15,7 +16,7 @@ import {
   CharactersCountBar,
 } from './styles'
 
-export function PostBox() {
+export function PostBox({ isQuotePost, quotePostInfo, handleCloseQuoteModal }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
@@ -41,6 +42,13 @@ export function PostBox() {
       isRepost: false,
       isQuotePost: false,
       user_id: userInfo.id,
+    }
+
+    if (isQuotePost) {
+      newPost.isQuotePost = true
+      newPost.origin_user_id = quotePostInfo.user_id
+      newPost.origin_post_id = quotePostInfo.post_id
+      handleCloseQuoteModal()
     }
 
     dispatch(newPostAction(newPost))
@@ -90,4 +98,24 @@ export function PostBox() {
       </TextAreaSection>
     </PostBoxContainer>
   )
+}
+
+PostBox.propTypes = {
+  isQuotePost: PropTypes.bool,
+  quotePostInfo: (props, propName) => {
+    if (props.isQuotePost && !props[propName]) {
+      return new Error('quotePostInfo is required if isQuotePost is true')
+    }
+
+    return true
+  },
+  handleCloseQuoteModal: (props, propName) => {
+    if (props.isQuotePost && !props[propName]) {
+      return new Error(
+        'handleCloseQuoteModal is required if isQuotePost is true',
+      )
+    }
+
+    return true
+  },
 }

@@ -11,6 +11,7 @@ import { Quote } from 'components/Quote'
 export function Home() {
   const navigate = useNavigate()
   const location = useLocation()
+  const [quotePostInfo, setQuotePostInfo] = useState({})
   const [modalQuoteOpen, setModalQuoteOpen] = useState(false)
   const [modalUserOpen, setModalUserOpen] = useState(false)
   const handleCloseQuoteModal = () => {
@@ -19,6 +20,11 @@ export function Home() {
   const handleCloseUserProfile = () => {
     setModalUserOpen(false)
     navigate(-1)
+  }
+
+  const handleOpenQuoteModal = (quotePost) => {
+    setModalQuoteOpen(true)
+    setQuotePostInfo(quotePost)
   }
 
   useEffect(() => {
@@ -33,7 +39,7 @@ export function Home() {
     <>
       <Header />
       <Container maxWidth="sm">
-        <Feed openQuoteModal={() => setModalQuoteOpen(true)} />
+        <Feed openQuoteModal={handleOpenQuoteModal} />
       </Container>
 
       <ModalBase isOpen={modalUserOpen} onClose={handleCloseUserProfile}>
@@ -41,7 +47,10 @@ export function Home() {
       </ModalBase>
 
       <ModalBase isOpen={modalQuoteOpen} onClose={handleCloseQuoteModal}>
-        <Quote />
+        <Quote
+          quotePostInfo={quotePostInfo}
+          handleCloseQuoteModal={handleCloseQuoteModal}
+        />
       </ModalBase>
     </>
   )

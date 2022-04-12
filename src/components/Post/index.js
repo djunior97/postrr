@@ -83,6 +83,28 @@ export function Post({ post, openQuoteModal }) {
     dispatch(newPost(newRepost))
   }
 
+  const handleQuotePost = () => {
+    const quotePostInfo = {
+      post_id: post.id,
+      content: post.content,
+      user_id: post.user_id,
+      userPicture: user.picture,
+      name: user.name,
+      username: user.username,
+    }
+
+    if (post.isRepost) {
+      quotePostInfo.post_id = originPost.id
+      quotePostInfo.content = originPost.content
+      quotePostInfo.user_id = originUser.id
+      quotePostInfo.userPicture = originUser.picture
+      quotePostInfo.name = originUser.name
+      quotePostInfo.username = originUser.username
+    }
+
+    openQuoteModal(quotePostInfo)
+  }
+
   return (
     <PostContainer>
       <LeftSection>
@@ -165,8 +187,8 @@ export function Post({ post, openQuoteModal }) {
           )}
 
           <QuoteActionContainer>
-            <QuoteIcon onClick={openQuoteModal} />
-            <button type="button" onClick={openQuoteModal}>
+            <QuoteIcon onClick={handleQuotePost} />
+            <button type="button" onClick={handleQuotePost}>
               <p>Quote Post</p>
             </button>
           </QuoteActionContainer>
