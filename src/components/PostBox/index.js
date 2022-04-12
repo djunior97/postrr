@@ -107,7 +107,7 @@ PostBox.propTypes = {
       return new Error('quotePostInfo is required if isQuotePost is true')
     }
 
-    return true
+    return null
   },
   handleCloseQuoteModal: (props, propName) => {
     if (props.isQuotePost && !props[propName]) {
@@ -116,6 +116,6 @@ PostBox.propTypes = {
       )
     }
 
-    return true
+    return null
   },
 }
