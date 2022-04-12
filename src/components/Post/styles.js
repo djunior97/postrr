@@ -98,6 +98,14 @@ export const RepostActionContainer = styled.div`
   align-items: center;
   column-gap: 5px;
 
+  button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: ${({ theme }) => theme.palette.primary.textSecondary};
+  }
+
   p {
     margin: 0;
     &:hover {
@@ -110,6 +118,14 @@ export const QuoteActionContainer = styled.div`
   display: flex;
   align-items: center;
   column-gap: 5px;
+
+  button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    color: ${({ theme }) => theme.palette.primary.textSecondary};
+  }
 
   p {
     margin: 0;

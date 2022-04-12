@@ -1,10 +1,12 @@
-import React from 'react'
+/* eslint-disable react/jsx-no-useless-fragment */
+import React, { useMemo } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import { SelectUsers } from 'store/users'
-import { SelectPosts } from 'store/posts'
+import { SelectPosts, newPost } from 'store/posts'
+import { SelectUserInfo } from 'store/userInfo'
 
 import {
   PostContainer,
@@ -26,21 +28,60 @@ import {
   QuotePostContent,
 } from './styles'
 
-export function Post({ post }) {
+export function Post({ post, openQuoteModal }) {
+  const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
   const allUsers = useSelector(SelectUsers)
   const allPosts = useSelector(SelectPosts)
-  const user = allUsers.find((u) => u.id === post.user_id)
+  const loggedUser = useSelector(SelectUserInfo)
+  const user = useMemo(
+    () => allUsers.find((u) => u.id === post.user_id),
+    [allUsers, post.user_id],
+  )
   const originUser =
     (post.isRepost || post.isQuotePost) &&
     allUsers.find((u) => u.id === post.origin_user_id)
   const originPost =
     (post.isRepost || post.isQuotePost) &&
     allPosts.find((p) => p.id === post.origin_post_id)
+  const originUserQuote =
+    post.isRepost &&
+    post.isQuotePost &&
+    allUsers.find((u) => u.id === post.origin_user_id_quote)
+  const originPostQuote =
+    post.isRepost &&
+    post.isQuotePost &&
+    allPosts.find((p) => p.id === post.origin_post_id_quote)
 
   const getCorrectUserAttribute = (prop) =>
     post.isRepost ? originUser[prop] : user[prop]
+
+  const handleRepost = () => {
+    const newRepost = {
+      id: allPosts.length + 1,
+      content: null,
+      isRepost: true,
+      user_id: loggedUser.id,
+      origin_user_id: post.user_id,
+      origin_post_id: post.id,
+      quotePostContent: null,
+    }
+
+    if (post.isRepost) {
+      newRepost.origin_user_id = post.origin_user_id
+      newRepost.origin_post_id = post.origin_post_id
+    }
+
+    if (post.isQuotePost) {
+      newRepost.isQuotePost = true
+      newRepost.content = post.content
+      newRepost.origin_user_id_quote = post.origin_user_id
+      newRepost.origin_post_id_quote = post.origin_post_id
+    }
+
+    dispatch(newPost(newRepost))
+  }
 
   return (
     <PostContainer>
@@ -82,27 +123,52 @@ export function Post({ post }) {
               <ProfilePicture
                 onClick={() => navigate(`${location.pathname}/userProfile`)}
                 alt="profile picture"
-                src={originUser.picture}
+                src={
+                  post.isRepost && post.isQuotePost
+                    ? originUserQuote.picture
+                    : originUser.picture
+                }
               />
               <UserInfo>
-                <Name>{originUser.name}</Name>
-                <UserName>@{originUser.username}</UserName>
+                <Name>
+                  {post.isRepost && post.isQuotePost
+                    ? originUserQuote.name
+                    : originUser.name}
+                </Name>
+                <UserName>
+                  @
+                  {post.isRepost && post.isQuotePost
+                    ? originUserQuote.username
+                    : originUser.username}
+                </UserName>
               </UserInfo>
             </QuoteUserWrapper>
 
-            <QuotePostContent>{originPost.content}</QuotePostContent>
+            <QuotePostContent>
+              {post.isRepost && post.isQuotePost
+                ? originPostQuote.content
+                : originPost.content}
+            </QuotePostContent>
           </QuotePostContainer>
         )}
 
         <ActionsBlock>
-          <RepostActionContainer>
-            <RepostIcon />
-            <p>Repost</p>
-          </RepostActionContainer>
+          {post.isRepost && post.user_id === loggedUser ? (
+            <></>
+          ) : (
+            <RepostActionContainer>
+              <RepostIcon onClick={handleRepost} />
+              <button type="button" onClick={handleRepost}>
+                <p>Repost</p>
+              </button>
+            </RepostActionContainer>
+          )}
 
           <QuoteActionContainer>
-            <QuoteIcon />
-            <p>Quote Post</p>
+            <QuoteIcon onClick={openQuoteModal} />
+            <button type="button" onClick={openQuoteModal}>
+              <p>Quote Post</p>
+            </button>
           </QuoteActionContainer>
         </ActionsBlock>
       </ContentSection>
@@ -119,5 +185,8 @@ Post.propTypes = {
     user_id: PropTypes.number,
     origin_user_id: PropTypes.number,
     origin_post_id: PropTypes.number,
+    origin_user_id_quote: PropTypes.number,
+    origin_post_id_quote: PropTypes.number,
   }).isRequired,
+  openQuoteModal: PropTypes.func.isRequired,
 }
