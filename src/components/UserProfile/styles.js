@@ -72,7 +72,7 @@ export const ProfilePicture = styled(Avatar)`
 `
 
 export const FollowButton = styled(Button)`
-  width: 75px;
+  width: 95px;
   border-radius: 20px;
   position: relative;
 `
