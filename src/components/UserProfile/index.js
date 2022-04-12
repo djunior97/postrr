@@ -1,11 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
 import { useLocation } from 'react-router-dom'
 
 import { SelectPostsByUserId } from 'store/posts'
 import { SelectUserById } from 'store/users'
-import { SelectUserInfo } from 'store/userInfo'
+import { SelectUserInfo, followAction, unfollowAction } from 'store/userInfo'
 import { Post } from 'components/Post'
 import { PostBox } from 'components/PostBox'
 
@@ -27,11 +27,20 @@ import {
 } from './styles'
 
 export function UserProfile({ backButtonAction }) {
+  const dispatch = useDispatch()
   const location = useLocation()
   const loggedUser = useSelector(SelectUserInfo)
   const userId = location.pathname.split('/')[3]
   const userInfo = useSelector((state) => SelectUserById(state, userId))
   const posts = useSelector((state) => SelectPostsByUserId(state, userId))
+
+  const handleUnfollow = () => {
+    dispatch(unfollowAction({ userId }))
+  }
+
+  const handleFollow = () => {
+    dispatch(followAction({ userId }))
+  }
 
   return (
     <Container>
@@ -48,9 +57,16 @@ export function UserProfile({ backButtonAction }) {
 
         <ProfilePictureWrapper>
           <ProfilePicture alt="profile picture" src={userInfo.picture} />
-          {!(loggedUser.id === Number(userId)) && (
-            <FollowButton variant="contained">Follow</FollowButton>
-          )}
+          {!(loggedUser.id === Number(userId)) &&
+            (loggedUser.following.includes(Number(userId)) ? (
+              <FollowButton variant="contained" onClick={handleUnfollow}>
+                Unfollow
+              </FollowButton>
+            ) : (
+              <FollowButton variant="contained" onClick={handleFollow}>
+                Follow
+              </FollowButton>
+            ))}
         </ProfilePictureWrapper>
 
         <MainUserNameWrapper>

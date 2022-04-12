@@ -27,11 +27,40 @@ const userSlice = createSlice({
       ...state,
       ...action.payload,
     }),
+    followAction: (state, action) => {
+      const userInfo = state
+
+      userInfo.info.following.push(Number(action.payload.userId))
+
+      localStorage.setItem(userInfoStorageKey, JSON.stringify(userInfo.info))
+
+      return userInfo
+    },
+    unfollowAction: (state, action) => {
+      const userInfo = { ...state.info }
+
+      const newFollowing = userInfo.following.filter(
+        (f) => f !== Number(action.payload.userId),
+      )
+
+      localStorage.setItem(
+        userInfoStorageKey,
+        JSON.stringify({ ...userInfo, following: newFollowing }),
+      )
+
+      return {
+        ...state,
+        info: {
+          ...userInfo,
+          following: newFollowing,
+        },
+      }
+    },
   },
 })
 
 // Actions
-export const { setUserInfo } = userSlice.actions
+export const { setUserInfo, followAction, unfollowAction } = userSlice.actions
 
 // Selectors
 export const SelectUserInfo = (state) => state.user.info
