@@ -80,7 +80,12 @@ export function UserProfile({ backButtonAction }) {
 
         <OtherInfoContainer>
           <JoinedIcon />
-          {userInfo.joinedDate}
+          Joined {` `}
+          {Intl.DateTimeFormat('en', {
+            year: 'numeric',
+            day: 'numeric',
+            month: 'long',
+          }).format(new Date(userInfo.joinedDate))}
         </OtherInfoContainer>
 
         <SocialInfoContainer>

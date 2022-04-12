@@ -10,7 +10,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'World`s Best Boss | Regional Manager @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365), // generate random date in the past year
+      ),
+    ),
   },
   {
     id: 2,
@@ -23,7 +27,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Beet Farmer | Assistant Regional Manager @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 3,
@@ -36,7 +44,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Father of two | Happily married',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 4,
@@ -49,7 +61,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Human Resources @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 5,
@@ -62,7 +78,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Temp @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 6,
@@ -75,7 +95,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Accounting @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 7,
@@ -88,7 +112,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Supplier @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 8,
@@ -101,7 +129,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Salesman @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 9,
@@ -114,7 +146,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Customer Service @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 10,
@@ -127,7 +163,11 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Receptionist @DunderMifflinScranton',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
   {
     id: 11,
@@ -140,6 +180,10 @@ export const users = [
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Mother of two | Happily married',
-    joinedDate: 'January 2020',
+    joinedDate: new Date(
+      new Date().setDate(
+        new Date().getDate() - Math.floor(Math.random() * 365),
+      ),
+    ),
   },
 ]
