@@ -1,5 +1,13 @@
-import { Post } from 'components/Post'
 import React from 'react'
+import PropTypes from 'prop-types'
+import { useSelector } from 'react-redux'
+import { useLocation } from 'react-router-dom'
+
+import { SelectPostsByUserId } from 'store/posts'
+import { SelectUserById } from 'store/users'
+import { SelectUserInfo } from 'store/userInfo'
+import { Post } from 'components/Post'
+import { PostBox } from 'components/PostBox'
 
 import {
   Container,
@@ -18,14 +26,20 @@ import {
   SocialInfoContainer,
 } from './styles'
 
-export function UserProfile() {
+export function UserProfile({ backButtonAction }) {
+  const location = useLocation()
+  const loggedUser = useSelector(SelectUserInfo)
+  const userId = location.pathname.split('/')[3]
+  const userInfo = useSelector((state) => SelectUserById(state, userId))
+  const posts = useSelector((state) => SelectPostsByUserId(state, userId))
+
   return (
     <Container>
       <TopWrapper>
-        <BackButton />
+        <BackButton onClick={backButtonAction} />
         <UserNameWrapper>
-          <h2>Michael Scott</h2>
-          <p>600 posts</p>
+          <h2>{userInfo.name}</h2>
+          <p>{posts.length} posts</p>
         </UserNameWrapper>
       </TopWrapper>
 
@@ -33,41 +47,45 @@ export function UserProfile() {
         <ProfileCover />
 
         <ProfilePictureWrapper>
-          <ProfilePicture
-            alt="Michael Scott"
-            src="https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png"
-          />
-          <FollowButton variant="contained">Follow</FollowButton>
+          <ProfilePicture alt="profile picture" src={userInfo.picture} />
+          {!(loggedUser.id === Number(userId)) && (
+            <FollowButton variant="contained">Follow</FollowButton>
+          )}
         </ProfilePictureWrapper>
 
         <MainUserNameWrapper>
-          <h2>Michael Scott</h2>
-          <p>@best_boss</p>
+          <h2>{userInfo.name}</h2>
+          <p>@{userInfo.username}</p>
         </MainUserNameWrapper>
 
         <BioContainer>
-          <p>World&#39;s Best Boss | Regional Manager @DunderMifflinScranton</p>
+          <p>{userInfo.bio}</p>
         </BioContainer>
 
         <OtherInfoContainer>
           <JoinedIcon />
-          Joined January 2020
+          {userInfo.joinedDate}
         </OtherInfoContainer>
 
         <SocialInfoContainer>
           <p>
-            <span>444</span> Following
+            <span>{userInfo.following.length}</span> Following
           </p>
           <p>
-            <span>600</span> Followers
+            <span>{userInfo.followers.length}</span> Followers
           </p>
         </SocialInfoContainer>
       </UserInfoContainer>
 
-      <Post />
-      <Post />
-      <Post />
-      <Post />
+      {loggedUser.id === Number(userId) && <PostBox />}
+
+      {posts.map((post) => (
+        <Post post={post} />
+      ))}
     </Container>
   )
+}
+
+UserProfile.propTypes = {
+  backButtonAction: PropTypes.func.isRequired,
 }

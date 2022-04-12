@@ -6,6 +6,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth'
 export const Container = styled(Paper)`
   max-width: 600px;
   margin: 0 auto;
+  min-height: 100vh;
 `
 
 export const TopWrapper = styled.div`
@@ -57,6 +58,7 @@ export const ProfilePictureWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  height: 68.5px;
 `
 
 export const ProfilePicture = styled(Avatar)`
