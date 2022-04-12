@@ -9,7 +9,7 @@ export const users = [
       'https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png',
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
-    bio: 'World&#39;s Best Boss | Regional Manager @DunderMifflinScranton',
+    bio: 'World`s Best Boss | Regional Manager @DunderMifflinScranton',
     joinedDate: 'January 2020',
   },
   {
@@ -58,7 +58,7 @@ export const users = [
     following: [1, 2, 3, 6, 7, 8],
     followers: [1, 2, 3, 4, 7, 8],
     picture:
-      'https://static.wikia.nocookie.net/theoffice/images/e/e0/Character_-_RyanHoward.PNG/revision/latest/top-crop/width/200/height/150?cb=20200414174545',
+      'https://media-cldnry.s-nbcnews.com/image/upload/t_fit-1240w,f_auto,q_auto:best/streams/2012/June/120627/434210-120627-ent-bjnovak-vmed.jpg',
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Temp @DunderMifflinScranton',
@@ -84,7 +84,7 @@ export const users = [
     following: [1, 4, 5, 6, 8],
     followers: [5, 4, 3, 2, 1],
     picture:
-      'https://static.wikia.nocookie.net/theoffice/images/9/90/2009Meredith.jpg/revision/latest/scale-to-width-down/700?cb=20170701084945',
+      'https://pm1.narvii.com/6410/8b11643ddcc8f5b3b21973e35d120ee3b856dd0b_128.jpg',
     cover:
       'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
     bio: 'Supplier @DunderMifflinScranton',

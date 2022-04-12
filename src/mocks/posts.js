@@ -1,12 +1,3 @@
-/**
- * id
- * content
- * isrepost
- * user_id
- * origin_user_id
- * quotepostcontent
- */
-
 export const posts = [
   {
     id: 1,
@@ -18,32 +9,32 @@ export const posts = [
     quotePostContent: null,
   },
   {
-    id: 2,
+    id: 4,
     content: null,
     isRepost: true,
     user_id: 1,
     origin_user_id: 3,
-    origin_post_id: 4,
+    origin_post_id: 2,
     quotePostContent: null,
   },
   {
-    id: 3,
+    id: 5,
     content: 'Such a nice guy!',
     isRepost: false,
     isQuotePost: true,
     user_id: 1,
     origin_user_id: 3,
-    origin_post_id: 5,
+    origin_post_id: 3,
   },
   {
-    id: 4,
+    id: 2,
     content:
       'So I am about to do something very bold at this job that Ive never done before. Try.',
     isRepost: false,
     user_id: 3,
   },
   {
-    id: 5,
+    id: 3,
     content: 'Hello this is Jim Halpert',
     isRepost: false,
     user_id: 3,
@@ -61,7 +52,7 @@ export const posts = [
     isQuotePost: true,
     user_id: 2,
     origin_user_id: 6,
-    origin_post_id: 8,
+    origin_post_id: 7,
   },
   {
     id: 7,
@@ -115,6 +106,23 @@ export const posts = [
     isRepost: false,
     user_id: 8,
     origin_user_id: 3,
-    origin_post_id: 5,
+    origin_post_id: 3,
+  },
+  {
+    id: 16,
+    content:
+      'Michael is like a movie on a plane. You know, its not great, but its something to watch. And when its over youre like... how much time is left on this flight? Now what?',
+    user_id: 4,
+  },
+  {
+    id: 17,
+    content:
+      'i’m such a perfectionist that i’d kinda rather not do it at all than do a crappy version.',
+    user_id: 5,
+  },
+  {
+    id: 18,
+    content: 'Booze',
+    user_id: 7,
   },
 ]
