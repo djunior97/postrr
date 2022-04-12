@@ -20,6 +20,7 @@ export const PostInput = styled(TextField)({
 export const ProfilePicture = styled(Avatar)`
   width: 48px;
   height: 48px;
+  cursor: pointer;
 `
 
 export const BottomWrapper = styled.div`

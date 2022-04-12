@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { SelectUserInfo } from 'store/userInfo'
@@ -16,6 +17,8 @@ import {
 
 export function PostBox() {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const location = useLocation()
   const [isPostButtonDisabled, setIsPostButtonDisabled] = useState(true)
   const [newPostContent, setNewPostContent] = useState('')
   const [charactersCount, setCharactersCount] = useState(0)
@@ -43,11 +46,19 @@ export function PostBox() {
     dispatch(newPostAction(newPost))
 
     setNewPostContent('')
+    setIsPostButtonDisabled(true)
+    setCharactersCount(0)
   }
 
   return (
     <PostBoxContainer>
-      <ProfilePicture alt="profile picture" src={userInfo.picture} />
+      <ProfilePicture
+        alt="profile picture"
+        src={userInfo.picture}
+        onClick={() =>
+          navigate(`${location.pathname}/userProfile/${userInfo.id}`)
+        }
+      />
 
       <TextAreaSection>
         <PostInput
