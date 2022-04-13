@@ -1,4 +1,5 @@
 # Posterr
+## By: Dirceu Antunes Junior
 
 ## Set up the project locally
 
