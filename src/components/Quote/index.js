@@ -11,11 +11,13 @@ import {
   UserInfo,
   Name,
   UserName,
+  CloseButton,
 } from './styles'
 
 export function Quote({ quotePostInfo, handleCloseQuoteModal }) {
   return (
     <QuoteContainer>
+      <CloseButton onClick={handleCloseQuoteModal} />
       <PostBox
         isQuotePost
         quotePostInfo={quotePostInfo}

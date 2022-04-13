@@ -1,5 +1,6 @@
 import styled from '@emotion/styled'
 import { Paper, Avatar } from '@mui/material'
+import CloseIcon from '@mui/icons-material/Close'
 
 export const QuoteContainer = styled(Paper)`
   max-width: 600px;
@@ -58,4 +59,9 @@ export const Name = styled.p`
 export const UserName = styled.p`
   cursor: pointer;
   font-size: 14px;
+`
+
+export const CloseButton = styled(CloseIcon)`
+  float: right;
+  cursor: pointer;
 `
