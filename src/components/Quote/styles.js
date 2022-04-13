@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import { Paper, Avatar } from '@mui/material'
 
 export const QuoteContainer = styled(Paper)`
-  width: 600px;
+  max-width: 600px;
   margin: 50px auto;
   padding: 12px;
 `
