@@ -38,6 +38,19 @@ export function Header() {
                 navigate(`${location.pathname}/userProfile/${loggedUser.id}`)
               }
             />
+            <Typography
+              variant="subtitle2"
+              sx={{
+                color: theme.palette.primary.textSecondary,
+                marginLeft: '5px',
+                cursor: 'pointer',
+              }}
+              onClick={() =>
+                navigate(`${location.pathname}/userProfile/${loggedUser.id}`)
+              }
+            >
+              @{loggedUser.username}
+            </Typography>
           </Toolbar>
         </Container>
       </AppBar>
