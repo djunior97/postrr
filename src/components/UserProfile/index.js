@@ -31,7 +31,8 @@ export function UserProfile({ backButtonAction }) {
   const location = useLocation()
   const loggedUser = useSelector(SelectUserInfo)
   const userId = location.pathname.split('/')[3]
-  const userInfo = useSelector((state) => SelectUserById(state, userId))
+  const selectedUser = useSelector((state) => SelectUserById(state, userId))
+  const userInfo = loggedUser.id === Number(userId) ? loggedUser : selectedUser
   const posts = useSelector((state) => SelectPostsByUserId(state, userId))
 
   const handleUnfollow = () => {
@@ -101,7 +102,7 @@ export function UserProfile({ backButtonAction }) {
       {loggedUser.id === Number(userId) && <PostBox />}
 
       {posts.map((post) => (
-        <Post post={post} />
+        <Post key={post.id} post={post} />
       ))}
     </Container>
   )
