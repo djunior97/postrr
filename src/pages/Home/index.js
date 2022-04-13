@@ -43,7 +43,10 @@ export function Home() {
       </Container>
 
       <ModalBase isOpen={modalUserOpen} onClose={handleCloseUserProfile}>
-        <UserProfile backButtonAction={handleCloseUserProfile} />
+        <UserProfile
+          backButtonAction={handleCloseUserProfile}
+          openQuoteModal={handleOpenQuoteModal}
+        />
       </ModalBase>
 
       <ModalBase isOpen={modalQuoteOpen} onClose={handleCloseQuoteModal}>

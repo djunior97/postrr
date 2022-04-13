@@ -26,7 +26,7 @@ import {
   SocialInfoContainer,
 } from './styles'
 
-export function UserProfile({ backButtonAction }) {
+export function UserProfile({ backButtonAction, openQuoteModal }) {
   const dispatch = useDispatch()
   const location = useLocation()
   const loggedUser = useSelector(SelectUserInfo)
@@ -102,7 +102,7 @@ export function UserProfile({ backButtonAction }) {
       {loggedUser.id === Number(userId) && <PostBox />}
 
       {posts.map((post) => (
-        <Post key={post.id} post={post} />
+        <Post key={post.id} post={post} openQuoteModal={openQuoteModal} />
       ))}
     </Container>
   )
@@ -110,4 +110,5 @@ export function UserProfile({ backButtonAction }) {
 
 UserProfile.propTypes = {
   backButtonAction: PropTypes.func.isRequired,
+  openQuoteModal: PropTypes.func.isRequired,
 }
