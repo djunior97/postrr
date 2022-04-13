@@ -49,7 +49,9 @@ we have an error or performance drop. To store the code repository I would like
 to use GitLab because I think it fits better for a closed and big project and 
 also has CI/CD integrated, which is good. It would need to have a firm Git workflow
 assuming we would have a bigger team of developers to have steady releases and 
-to avoid a work from one developer conflicting with other ones. Also, unit, integration
-and end to end tests would be a must to ensure the code quality.
+to avoid a work from one developer conflicting with other ones. Unit, integration
+and end to end tests would be a must to ensure the code quality. Also, with more
+developers working on the project, would be essential to add TypeScript to the 
+project so it would be typed and help in the development environment.
 
 
