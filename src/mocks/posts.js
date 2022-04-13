@@ -7,6 +7,7 @@ export const posts = [
     user_id: 1,
     origin_user_id: null,
     quotePostContent: null,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 4,
@@ -16,6 +17,7 @@ export const posts = [
     origin_user_id: 3,
     origin_post_id: 2,
     quotePostContent: null,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 5,
@@ -25,6 +27,7 @@ export const posts = [
     user_id: 1,
     origin_user_id: 3,
     origin_post_id: 3,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 2,
@@ -32,18 +35,21 @@ export const posts = [
       'So I am about to do something very bold at this job that Ive never done before. Try.',
     isRepost: false,
     user_id: 3,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 3,
     content: 'Hello this is Jim Halpert',
     isRepost: false,
     user_id: 3,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 6,
     content: 'Beets!',
     isRepost: false,
     user_id: 2,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 8,
@@ -53,24 +59,28 @@ export const posts = [
     user_id: 2,
     origin_user_id: 6,
     origin_post_id: 7,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 7,
     content: 'R.I.P Sprinkles 😭',
     isRepost: false,
     user_id: 6,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 9,
     content: 'I DONT CARE WHAT THEY SAY ABOUT ME. I JUST WANT TO EAT.',
     isRepost: false,
     user_id: 11,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 10,
     content: `${'WHEN YOURE A KID, YOU ASSUME YOUR PARENTS ARE SOUL MATES.'.toLowerCase()} My kid are gonna be right about that`,
     isRepost: false,
     user_id: 11,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 11,
@@ -80,24 +90,28 @@ export const posts = [
     origin_user_id: 11,
     origin_post_id: 10,
     quotePostContent: null,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 12,
     content: `I love you Ryan 🥰`,
     isRepost: false,
     user_id: 9,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 13,
     content: 'Dunder Mifflin this is Erin! 🤪',
     isRepost: false,
     user_id: 10,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 14,
     content: 'Call me The Nard Dog!',
     isRepost: false,
     user_id: 8,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 15,
@@ -107,22 +121,26 @@ export const posts = [
     user_id: 8,
     origin_user_id: 3,
     origin_post_id: 3,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 16,
     content:
       'Michael is like a movie on a plane. You know, its not great, but its something to watch. And when its over youre like... how much time is left on this flight? Now what?',
     user_id: 4,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 17,
     content:
       'i’m such a perfectionist that i’d kinda rather not do it at all than do a crappy version.',
     user_id: 5,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
   {
     id: 18,
     content: 'Booze',
     user_id: 7,
+    createdAt: new Date(new Date().setDate(new Date().getDate() - 1)),
   },
 ]

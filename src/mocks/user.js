@@ -8,6 +8,7 @@ export const user = {
     'https://www.bu.edu/lernet/artemis/years/2017/projects/StudentWebsites/Dara/images/MichaelScott.png',
   cover:
     'https://upload.wikimedia.org/wikipedia/commons/thumb/9/9c/Dunder_Mifflin%2C_Inc.svg/1920px-Dunder_Mifflin%2C_Inc.svg.png',
-  bio: 'World&#39;s Best Boss | Regional Manager @DunderMifflinScranton',
+  bio: 'World`s Best Boss | Regional Manager @DunderMifflinScranton',
   joinedDate: 'January 2020',
+  todayPosts: 0,
 }

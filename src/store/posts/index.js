@@ -51,4 +51,18 @@ export const SelectFollowingPosts = (state) => {
 export const SelectPostsByUserId = (state, userId) =>
   state.posts.list.filter((p) => p.user_id === Number(userId))
 
+export const SelectTodaysPosts = (state, userId) => {
+  const posts = state.posts.list
+
+  const todaysPosts = posts.filter((p) => {
+    const isTodayPost =
+      new Date(p.createdAt).setHours(0, 0, 0, 0) ===
+      new Date().setHours(0, 0, 0, 0)
+
+    return isTodayPost && p.user_id === userId
+  })
+
+  return todaysPosts
+}
+
 export default postsSlice.reducer

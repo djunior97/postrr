@@ -1,11 +1,12 @@
 /* eslint-disable react/jsx-no-useless-fragment */
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import PropTypes from 'prop-types'
+import Tooltip from '@mui/material/Tooltip'
 
 import { SelectUsers } from 'store/users'
-import { SelectPosts, newPost } from 'store/posts'
+import { SelectPosts, newPost, SelectTodaysPosts } from 'store/posts'
 import { SelectUserInfo } from 'store/userInfo'
 
 import {
@@ -32,9 +33,14 @@ export function Post({ post, openQuoteModal }) {
   const dispatch = useDispatch()
   const location = useLocation()
   const navigate = useNavigate()
+  const [showTooltipRepost, setShowTooltipRepost] = useState(false)
+  const [showTooltipQuote, setShowTooltipQuote] = useState(false)
   const allUsers = useSelector(SelectUsers)
   const allPosts = useSelector(SelectPosts)
   const loggedUser = useSelector(SelectUserInfo)
+  const todaysPosts = useSelector((state) =>
+    SelectTodaysPosts(state, loggedUser.id),
+  )
   const user = useMemo(
     () => allUsers.find((u) => u.id === post.user_id),
     [allUsers, post.user_id],
@@ -58,6 +64,10 @@ export function Post({ post, openQuoteModal }) {
     post.isRepost ? originUser[prop] : user[prop]
 
   const handleRepost = () => {
+    if (todaysPosts.length >= 5) {
+      return
+    }
+
     const newRepost = {
       id: allPosts.length + 1,
       content: null,
@@ -66,6 +76,7 @@ export function Post({ post, openQuoteModal }) {
       origin_user_id: post.user_id,
       origin_post_id: post.id,
       quotePostContent: null,
+      createdAt: new Date(),
     }
 
     if (post.isRepost) {
@@ -84,6 +95,10 @@ export function Post({ post, openQuoteModal }) {
   }
 
   const handleQuotePost = () => {
+    if (todaysPosts.length >= 5) {
+      return
+    }
+
     const quotePostInfo = {
       post_id: post.id,
       content: post.content,
@@ -91,6 +106,7 @@ export function Post({ post, openQuoteModal }) {
       userPicture: user.picture,
       name: user.name,
       username: user.username,
+      createdAt: new Date(),
     }
 
     if (post.isRepost) {
@@ -105,6 +121,26 @@ export function Post({ post, openQuoteModal }) {
     openQuoteModal(quotePostInfo)
   }
 
+  const handleHideTooltipRepost = () => {
+    setShowTooltipRepost(false)
+  }
+
+  const handleShowTooltipRepost = () => {
+    if (todaysPosts.length >= 5) {
+      setShowTooltipRepost(true)
+    }
+  }
+
+  const handleHideTooltipQuote = () => {
+    setShowTooltipQuote(false)
+  }
+
+  const handleShowTooltipQuote = () => {
+    if (todaysPosts.length >= 5) {
+      setShowTooltipQuote(true)
+    }
+  }
+
   return (
     <PostContainer>
       <LeftSection>
@@ -112,6 +148,7 @@ export function Post({ post, openQuoteModal }) {
 
         <ProfilePicture
           onClick={() =>
+            !location.pathname.includes('/userProfile') &&
             navigate(
               `${location.pathname}/userProfile/${getCorrectUserAttribute(
                 'id',
@@ -131,8 +168,30 @@ export function Post({ post, openQuoteModal }) {
         )}
 
         <UserInfo>
-          <Name>{getCorrectUserAttribute('name')}</Name>
-          <UserName>@{getCorrectUserAttribute('username')}</UserName>
+          <Name
+            onClick={() =>
+              !location.pathname.includes('/userProfile') &&
+              navigate(
+                `${location.pathname}/userProfile/${getCorrectUserAttribute(
+                  'id',
+                )}`,
+              )
+            }
+          >
+            {getCorrectUserAttribute('name')}
+          </Name>
+          <UserName
+            onClick={() =>
+              !location.pathname.includes('/userProfile') &&
+              navigate(
+                `${location.pathname}/userProfile/${getCorrectUserAttribute(
+                  'id',
+                )}`,
+              )
+            }
+          >
+            @{getCorrectUserAttribute('username')}
+          </UserName>
         </UserInfo>
 
         <PostContent>
@@ -143,7 +202,16 @@ export function Post({ post, openQuoteModal }) {
           <QuotePostContainer>
             <QuoteUserWrapper>
               <ProfilePicture
-                onClick={() => navigate(`${location.pathname}/userProfile`)}
+                onClick={() =>
+                  !location.pathname.includes('/userProfile') &&
+                  navigate(
+                    `${location.pathname}/userProfile/${
+                      post.isRepost && post.isQuotePost
+                        ? originUserQuote.id
+                        : originUser.id
+                    }`,
+                  )
+                }
                 alt="profile picture"
                 src={
                   post.isRepost && post.isQuotePost
@@ -152,12 +220,34 @@ export function Post({ post, openQuoteModal }) {
                 }
               />
               <UserInfo>
-                <Name>
+                <Name
+                  onClick={() =>
+                    !location.pathname.includes('/userProfile') &&
+                    navigate(
+                      `${location.pathname}/userProfile/${
+                        post.isRepost && post.isQuotePost
+                          ? originUserQuote.id
+                          : originUser.id
+                      }`,
+                    )
+                  }
+                >
                   {post.isRepost && post.isQuotePost
                     ? originUserQuote.name
                     : originUser.name}
                 </Name>
-                <UserName>
+                <UserName
+                  onClick={() =>
+                    !location.pathname.includes('/userProfile') &&
+                    navigate(
+                      `${location.pathname}/userProfile/${
+                        post.isRepost && post.isQuotePost
+                          ? originUserQuote.id
+                          : originUser.id
+                      }`,
+                    )
+                  }
+                >
                   @
                   {post.isRepost && post.isQuotePost
                     ? originUserQuote.username
@@ -178,20 +268,34 @@ export function Post({ post, openQuoteModal }) {
           {post.isRepost && post.user_id === loggedUser ? (
             <></>
           ) : (
-            <RepostActionContainer>
-              <RepostIcon onClick={handleRepost} />
-              <button type="button" onClick={handleRepost}>
-                <p>Repost</p>
-              </button>
-            </RepostActionContainer>
+            <Tooltip
+              open={showTooltipRepost}
+              onClose={handleHideTooltipRepost}
+              onOpen={handleShowTooltipRepost}
+              title="You already created 5 posts today. Come back tomorrow!"
+            >
+              <RepostActionContainer>
+                <RepostIcon onClick={handleRepost} />
+                <button type="button" onClick={handleRepost}>
+                  <p>Repost</p>
+                </button>
+              </RepostActionContainer>
+            </Tooltip>
           )}
 
-          <QuoteActionContainer>
-            <QuoteIcon onClick={handleQuotePost} />
-            <button type="button" onClick={handleQuotePost}>
-              <p>Quote Post</p>
-            </button>
-          </QuoteActionContainer>
+          <Tooltip
+            open={showTooltipQuote}
+            onClose={handleHideTooltipQuote}
+            onOpen={handleShowTooltipQuote}
+            title="You already created 5 posts today. Come back tomorrow!"
+          >
+            <QuoteActionContainer>
+              <QuoteIcon onClick={handleQuotePost} />
+              <button type="button" onClick={handleQuotePost}>
+                <p>Quote Post</p>
+              </button>
+            </QuoteActionContainer>
+          </Tooltip>
         </ActionsBlock>
       </ContentSection>
     </PostContainer>

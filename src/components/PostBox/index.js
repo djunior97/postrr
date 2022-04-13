@@ -2,9 +2,14 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
+import Tooltip from '@mui/material/Tooltip'
 
 import { SelectUserInfo } from 'store/userInfo'
-import { SelectPosts, newPost as newPostAction } from 'store/posts'
+import {
+  SelectPosts,
+  newPost as newPostAction,
+  SelectTodaysPosts,
+} from 'store/posts'
 
 import {
   PostBoxContainer,
@@ -20,11 +25,15 @@ export function PostBox({ isQuotePost, quotePostInfo, handleCloseQuoteModal }) {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   const location = useLocation()
+  const [showTooltip, setShowTooltip] = useState(false)
   const [isPostButtonDisabled, setIsPostButtonDisabled] = useState(true)
   const [newPostContent, setNewPostContent] = useState('')
   const [charactersCount, setCharactersCount] = useState(0)
   const userInfo = useSelector(SelectUserInfo)
   const posts = useSelector(SelectPosts)
+  const todaysPosts = useSelector((state) =>
+    SelectTodaysPosts(state, userInfo.id),
+  )
 
   const handlePostInputChange = (event) => {
     setIsPostButtonDisabled(shouldDisablePostButton(event.target.value))
@@ -33,7 +42,8 @@ export function PostBox({ isQuotePost, quotePostInfo, handleCloseQuoteModal }) {
   }
 
   const shouldDisablePostButton = (postContent) =>
-    !(postContent.length >= 1 && postContent.length <= 777)
+    !(postContent.length >= 1 && postContent.length <= 777) ||
+    todaysPosts.length >= 5
 
   const handleSubmitPost = () => {
     const newPost = {
@@ -42,6 +52,7 @@ export function PostBox({ isQuotePost, quotePostInfo, handleCloseQuoteModal }) {
       isRepost: false,
       isQuotePost: false,
       user_id: userInfo.id,
+      createdAt: new Date(),
     }
 
     if (isQuotePost) {
@@ -56,6 +67,16 @@ export function PostBox({ isQuotePost, quotePostInfo, handleCloseQuoteModal }) {
     setNewPostContent('')
     setIsPostButtonDisabled(true)
     setCharactersCount(0)
+  }
+
+  const handleHideTooltip = () => {
+    setShowTooltip(false)
+  }
+
+  const handleShowTooltip = () => {
+    if (todaysPosts.length >= 5) {
+      setShowTooltip(true)
+    }
   }
 
   return (
@@ -87,13 +108,22 @@ export function PostBox({ isQuotePost, quotePostInfo, handleCloseQuoteModal }) {
             {charactersCount >= 700 && <p>{charactersCount} / 777</p>}
           </div>
 
-          <PostButton
-            onClick={handleSubmitPost}
-            disabled={isPostButtonDisabled}
-            variant="contained"
+          <Tooltip
+            open={showTooltip}
+            onClose={handleHideTooltip}
+            onOpen={handleShowTooltip}
+            title="You already created 5 posts today. Come back tomorrow!"
           >
-            Post!
-          </PostButton>
+            <span>
+              <PostButton
+                onClick={handleSubmitPost}
+                disabled={isPostButtonDisabled}
+                variant="contained"
+              >
+                Post!
+              </PostButton>
+            </span>
+          </Tooltip>
         </BottomWrapper>
       </TextAreaSection>
     </PostBoxContainer>
